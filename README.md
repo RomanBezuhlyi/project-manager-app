@@ -5,18 +5,14 @@ Project Manager — Test Task
 🚀 Запуск проєкту
 
 1. Клонування репозиторію
-   git clone https://github.com/RomanBezuhlyi/Project_manager.git
+   git clone https://github.com/RomanBezuhlyi/project-manager-app.git
    cd Project_manager
 
 2. Встановлення залежностей
    npm install
 
 3. Запуск мок-бекенду (json-server)
-   npx json-server --watch db.json --port 3000
+   npm run mock
 
 4. Запуск фронтенду
    npm run dev
-
-Застосунок буде доступний за адресою:
-
-http://localhost:5173
