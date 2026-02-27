@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_BASE = import.meta.env.DEV ? '/api' : '/api'
+const API_BASE = '/api'
 
 export const api = axios.create({
 	baseURL: API_BASE,
