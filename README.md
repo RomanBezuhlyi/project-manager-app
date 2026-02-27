@@ -17,3 +17,4 @@ project-manager-app — Test Task
    npm run dev
 
 Production version: https://project-manager-app-eight.vercel.app/
+Для продакшн версії сервер працює з db.json на Render.
