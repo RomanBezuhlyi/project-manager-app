@@ -16,5 +16,6 @@ project-manager-app — Test Task
 4. Запуск фронтенду
    npm run dev
 
-Production version: https://project-manager-app-eight.vercel.app/
-Для продакшн версії сервер працює з db.json на Render.
+Production version
+Frontend: https://project-manager-app-eight.vercel.app/
+Backend: для продакшн-версії сервер з db.json розгорнутий на Render.
