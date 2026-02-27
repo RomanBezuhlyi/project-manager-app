@@ -95,6 +95,7 @@ const props = defineProps<{
 	}[]
 	data: any[]
 	filters?: {
+		label: string
 		key: string
 		type: string
 		placeholder?: string

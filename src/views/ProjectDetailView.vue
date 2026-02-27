@@ -58,6 +58,7 @@ import Table from '@/components/Table.vue'
 import DefaultLayout from '@/layout/DefaultLayout.vue'
 import { useTasksStore } from '@/store/tasks'
 import { useUsersStore } from '@/store/users'
+import type { Task, TaskStatus } from '@/types/task'
 import { computed, onMounted, ref, watch } from 'vue'
 
 const props = defineProps<{ id: number }>()
@@ -78,11 +79,10 @@ watch(activeTab, newTab => {
 
 watch([filterAssignee, filterStatus], () => {
 	tasks.setFilters({
-		assignee: filterAssignee.value || null,
-		status: filterStatus.value || null,
+		assignee: filterAssignee.value || '',
+		status: (filterStatus.value as TaskStatus) || null,
 	})
 })
-
 const assignees = computed(() => users.assignees ?? [])
 
 const tasksForProject = computed(() => {
@@ -105,7 +105,7 @@ const columns = [
 		key: 'dueDate',
 		label: 'Термін',
 		sortable: true,
-		render: row => new Date(row.dueDate).toLocaleDateString(),
+		render: (row: Task) => new Date(row.dueDate).toLocaleDateString(),
 	},
 ]
 
@@ -141,6 +141,9 @@ function openModal() {
 }
 
 function onTasksReorder(orderedIds: string[]) {
-	tasks.reorder(props.id, orderedIds)
+	tasks.reorder(
+		props.id,
+		orderedIds.map(id => Number(id))
+	)
 }
 </script>

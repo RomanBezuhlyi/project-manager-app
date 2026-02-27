@@ -34,7 +34,7 @@
 					group="tasks"
 					ghost-class="drag-ghost"
 					chosen-class="drag-chosen"
-					@change="evt => onChange(evt, status as TaskStatus)"
+					@change="onChange($event, status as TaskStatus)"
 				>
 					<template #item="{ element }">
 						<div class="card">
@@ -57,6 +57,12 @@ import type { TaskStatus } from '@/types/task'
 import { formatDate } from '@/utils/date'
 import { computed, ref, watch } from 'vue'
 import draggable from 'vuedraggable'
+
+interface DragChangeEvent<T = any> {
+	added?: { element: T; newIndex: number }
+	removed?: { element: T; oldIndex: number }
+	moved?: { element: T; oldIndex: number; newIndex: number }
+}
 
 const props = defineProps<{ projectId: number }>()
 const tasks = useTasksStore()
@@ -99,7 +105,7 @@ watch(
 	{ immediate: true, deep: true }
 )
 
-async function onChange(evt: any, status: TaskStatus) {
+async function onChange(evt: DragChangeEvent, status: TaskStatus) {
 	const added = evt.added?.element
 	if (added) {
 		await tasks.patch(added.id, { status })

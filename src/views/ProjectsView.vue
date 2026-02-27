@@ -26,6 +26,7 @@ import Table from '@/components/Table.vue'
 import DefaultLayout from '@/layout/DefaultLayout.vue'
 import { useProjectsStore } from '@/store/projects'
 import { useTasksStore } from '@/store/tasks'
+import type { Project } from '@/types/project'
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -50,12 +51,11 @@ const projectsWithStatus = computed(() =>
 const columns = [
 	{ key: 'id', label: 'ID', sortable: true },
 	{ key: 'name', label: 'Назва', sortable: true },
-	{ key: 'taskCount', label: 'Кількість завдань', sortable: true },
-	{ key: 'status', label: 'Статус', sortable: true },
 	{
 		key: 'createdAt',
-		label: 'Дата створення',
-		render: row => new Date(row.createdAt).toLocaleDateString(),
+		label: 'Створено',
+		sortable: true,
+		render: (row: Project) => new Date(row.createdAt).toLocaleDateString(),
 	},
 ]
 

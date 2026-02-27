@@ -70,7 +70,9 @@ export const useTasksStore = defineStore('tasks', {
 		async patch(id: number, partial: Partial<Task>) {
 			const { data } = await api.patch<Task>(`/tasks/${id}`, partial)
 			const i = this.items.findIndex(t => t.id === id)
-			if (i !== -1) Object.assign(this.items[i], data)
+			if (i !== -1 && this.items[i]) {
+				Object.assign(this.items[i], data)
+			}
 			save('tasks.items', this.items)
 		},
 		reorder(projectId: number, taskIdsInOrder: number[]) {
@@ -96,8 +98,10 @@ export const useTasksStore = defineStore('tasks', {
 
 				for (const x of lane) {
 					const i = this.items.findIndex(y => y.id === x.id)
-					Object.assign(this.items[i], x)
-					await this.patch(x.id, { status: x.status, order: x.order })
+					if (i !== -1 && this.items[i]) {
+						Object.assign(this.items[i], x)
+						await this.patch(x.id, { status: x.status, order: x.order })
+					}
 				}
 
 				save('tasks.items', this.items)
