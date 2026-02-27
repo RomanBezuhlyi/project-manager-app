@@ -43,6 +43,8 @@
 							sortDir === 'asc' ? '↑' : '↓'
 						}}</span>
 					</th>
+					<th>Дії</th>
+					<!-- Колонка для кнопки видалення -->
 				</tr>
 			</thead>
 
@@ -58,13 +60,23 @@
 						<td v-for="col in columns" :key="col.key">
 							{{ col.render ? col.render(element) : element[col.key] }}
 						</td>
+						<td>
+							<button
+								type="button"
+								class="delete-btn"
+								@click.stop="$emit('row-delete', element)"
+								title="Видалити"
+							>
+								Видалити
+							</button>
+						</td>
 					</tr>
 				</template>
 			</draggable>
 
 			<tbody v-else>
 				<tr v-if="sortedData.length === 0">
-					<td :colspan="columns.length" class="empty">Немає даних</td>
+					<td :colspan="columns.length + 1" class="empty">Немає даних</td>
 				</tr>
 				<tr
 					v-else
@@ -74,6 +86,16 @@
 				>
 					<td v-for="col in columns" :key="col.key">
 						{{ col.render ? col.render(row) : row[col.key] }}
+					</td>
+					<td>
+						<button
+							type="button"
+							class="delete-btn"
+							@click.stop="$emit('row-delete', row)"
+							title="Видалити"
+						>
+							Видалити
+						</button>
 					</td>
 				</tr>
 			</tbody>
@@ -104,7 +126,7 @@ const props = defineProps<{
 	draggable?: boolean
 }>()
 
-const emit = defineEmits(['row-click', 'reorder'])
+const emit = defineEmits(['row-click', 'row-delete', 'reorder'])
 const tableRef = ref<HTMLTableElement | null>(null)
 const { init } = useColumnResize()
 

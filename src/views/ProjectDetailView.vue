@@ -2,7 +2,10 @@
 	<DefaultLayout>
 		<div class="container">
 			<div class="page-header">
-				<h2>Проєкт #{{ props.id }}</h2>
+				<div class="page-header-description">
+					<h2>Проєкт #{{ props.id }}</h2>
+					<p class="project-description">{{ project?.description }}</p>
+				</div>
 				<button class="btn-primary" @click="openModal">Додати завдання</button>
 			</div>
 
@@ -29,6 +32,7 @@
 					:filters="tableFilters"
 					:draggable="true"
 					@reorder="onTasksReorder"
+					@row-delete="onDeleteTask"
 				/>
 			</div>
 
@@ -56,6 +60,7 @@ import Board from '@/components/Board.vue'
 import Modal from '@/components/Modal.vue'
 import Table from '@/components/Table.vue'
 import DefaultLayout from '@/layout/DefaultLayout.vue'
+import { useProjectsStore } from '@/store/projects'
 import { useTasksStore } from '@/store/tasks'
 import { useUsersStore } from '@/store/users'
 import type { Task, TaskStatus } from '@/types/task'
@@ -64,6 +69,7 @@ import { computed, onMounted, ref, watch } from 'vue'
 const props = defineProps<{ id: number }>()
 const tasks = useTasksStore()
 const users = useUsersStore()
+const projects = useProjectsStore()
 
 const showModal = ref(false)
 const activeTab = ref<'table' | 'board'>(
@@ -133,8 +139,14 @@ const tableFilters = computed(() => [
 ])
 
 onMounted(async () => {
+	await projects.fetchAll()
 	await tasks.fetchAll()
+	console.log(projects)
 })
+
+const project = computed(() =>
+	projects.items.find(p => p.id === Number(props.id))
+)
 
 function openModal() {
 	showModal.value = true
@@ -145,5 +157,9 @@ function onTasksReorder(orderedIds: string[]) {
 		props.id,
 		orderedIds.map(id => Number(id))
 	)
+}
+
+function onDeleteTask(row: Task) {
+	tasks.remove(row.id)
 }
 </script>

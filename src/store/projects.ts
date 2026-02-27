@@ -45,5 +45,15 @@ export const useProjectsStore = defineStore('projects', {
 				toast.error('Не вдалося додати проєкт')
 			}
 		},
+		async remove(projectId: number) {
+			try {
+				await api.delete(`/projects/${projectId}`)
+				this.items = this.items.filter(p => p.id !== projectId)
+				save('projects.items', this.items)
+				toast.success('Проєкт успішно видалено!')
+			} catch {
+				toast.error('Не вдалося видалити проєкт')
+			}
+		},
 	},
 })

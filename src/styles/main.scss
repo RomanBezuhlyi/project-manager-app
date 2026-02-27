@@ -443,3 +443,38 @@ tbody tr.dragging {
 tbody tr.ghost {
 	background: #dbeafe;
 }
+
+.delete-btn {
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	color: red;
+	font-size: 1em;
+	transition: 0.3 all;
+}
+.delete-btn:hover {
+	color: darkred;
+}
+.empty {
+	text-align: center;
+	font-style: italic;
+	color: #666;
+}
+.sortable {
+	cursor: pointer;
+	user-select: none;
+}
+.filters {
+	display: flex;
+	gap: 1rem;
+	margin-bottom: 1rem;
+}
+.filter-label {
+	font-weight: 500;
+	margin-right: 0.5rem;
+}
+.project-description {
+	font-style: italic;
+	color: #555;
+	margin-top: 0.25rem;
+}

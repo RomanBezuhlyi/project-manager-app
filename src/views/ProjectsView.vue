@@ -13,6 +13,7 @@
 				:data="projectsWithStatus"
 				:filters="tableFilters"
 				@row-click="goToProject"
+				@row-delete="onDeleteProject"
 			/>
 
 			<Modal type="project" :show="showModal" @close="showModal = false" />
@@ -81,6 +82,10 @@ const tableFilters = [
 
 function goToProject(row: any) {
 	router.push(`/project/${row.id}`)
+}
+
+function onDeleteProject(row: Project) {
+	projects.remove(row.id)
 }
 
 onMounted(async () => {

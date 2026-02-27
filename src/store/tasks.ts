@@ -110,5 +110,15 @@ export const useTasksStore = defineStore('tasks', {
 				toast.error('Не вдалося перемістити завдання')
 			}
 		},
+		async remove(taskId: number) {
+			try {
+				await api.delete(`/tasks/${taskId}`)
+				this.items = this.items.filter(t => t.id !== taskId)
+				save('tasks.items', this.items)
+				toast.success('Завдання успішно видалено!')
+			} catch {
+				toast.error('Не вдалося видалити завдання')
+			}
+		},
 	},
 })
