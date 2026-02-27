@@ -51,6 +51,8 @@ const projectsWithStatus = computed(() =>
 const columns = [
 	{ key: 'id', label: 'ID', sortable: true },
 	{ key: 'name', label: 'Назва', sortable: true },
+	{ key: 'taskCount', label: 'Кількість завдань', sortable: true },
+	{ key: 'status', label: 'Статус', sortable: true },
 	{
 		key: 'createdAt',
 		label: 'Створено',
