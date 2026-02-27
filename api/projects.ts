@@ -8,13 +8,13 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
 
 	switch (req.method) {
 		case 'GET':
-			res.status(200).json(db)
+			res.status(200).json(db.projects)
 			break
 		case 'POST':
-			const newData = req.body
-			db.push(newData)
+			const newProject = req.body
+			db.projects.push(newProject)
 			fs.writeFileSync(filePath, JSON.stringify(db, null, 2))
-			res.status(201).json(newData)
+			res.status(201).json(newProject)
 			break
 		default:
 			res.status(405).json({ message: 'Method not allowed' })
