@@ -15,3 +15,5 @@ project-manager-app — Test Task
 
 4. Запуск фронтенду
    npm run dev
+
+Production version: https://project-manager-app-eight.vercel.app/

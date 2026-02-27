@@ -3,7 +3,7 @@
 		<div class="container">
 			<div class="page-header">
 				<div class="page-header-description">
-					<h2>Проєкт #{{ props.id }}</h2>
+					<h2>{{ project?.name }}</h2>
 					<p class="project-description">{{ project?.description }}</p>
 				</div>
 				<button class="btn-primary" @click="openModal">Додати завдання</button>

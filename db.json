@@ -1,4 +1,13 @@
 {
-  "projects": [],
+  "projects": [
+    {
+      "taskCount": 0,
+      "createdAt": "2026-02-27T12:46:46.223Z",
+      "name": "Робота на подвірі",
+      "description": "наводим чистоту",
+      "status": "active",
+      "id": 1
+    }
+  ],
   "tasks": []
 }
