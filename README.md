@@ -1,4 +1,4 @@
-Project Manager — Test Task
+project-manager-app — Test Task
 
 Односторінковий застосунок для керування проєктами та завданнями. Реалізовано на Vue 3, TypeScript, Pinia, із використанням json-server як мок-бекенду.
 
@@ -6,7 +6,6 @@ Project Manager — Test Task
 
 1. Клонування репозиторію
    git clone https://github.com/RomanBezuhlyi/project-manager-app.git
-   cd Project_manager
 
 2. Встановлення залежностей
    npm install
